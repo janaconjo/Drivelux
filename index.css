@@ -1,0 +1,375 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #060505;
+}
+
+header {
+    background-color:#7285ad;
+    padding: 20px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav h1 {
+    color: white;
+    font-size: 24px;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+/* === NAVBAR === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #0f1012;;
+  color: #fff;
+  border-radius: 30px;
+}
+
+.navbar h1 {
+  font-size: 24px;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* === MENU HAMBÚRGUER RESPONSIVO === */
+@media (max-width: 768px) {
+  .navbar {
+    position: relative; /* Para controlar o nav-links */
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    list-style: none;
+    background: #9cadd0;
+    position: fixed; /* fica fora do fluxo normal */
+    top: 0;
+    right: -250px; /* Escondido fora da tela à direita */
+    height: 60%;
+    width: 200px; /* Largura do menu */
+    padding-top: 70px;
+    padding-left: 20px;
+    transition: right 0.4s ease;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    border-radius: 20px 0px 0px 20px;
+
+  }
+
+  .navbar ul.show {
+    right: 0; /* Move para dentro */
+  }
+
+  .menu-toggle {
+    display: block;
+    z-index: 1001; /* Garante que fique por cima */
+  }
+}
+
+
+/* === CARD DE OFERTA RESPONSIVO === */
+.offer-card {
+  max-width: 300px;
+  width: 80%;
+  background: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(84, 17, 17, 0.1);
+}
+
+.offer-card form input,
+.offer-card form select,
+.offer-card form button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Mantém o card proporcional mesmo em ecrãs estreitos */
+@media (max-width: 480px) {
+  .offer-card {
+    width: 95%;
+    padding: 15px;
+  }
+}
+.offer-card {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.offer-card.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color:  #7285ad;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+#searchBar {
+    padding: 10px;
+    width: 70%;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.car-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.category {
+    margin-bottom: 40px;
+}
+
+.category h2 {
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.car-card {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+}
+
+.car-card:hover {
+    transform: scale(1.05);
+}
+
+.car-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.car-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.car-card button {
+    background:  #176585;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.car-card button:hover {
+    background: #0056b3;
+}
+
+.offer-card {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.offer-card.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.offer-card h2 {
+    color: red;
+}
+
+.offer-card input, .offer-card select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.offer-card button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.offer-card button:hover {
+    background: darkred;
+}
+
+footer {
+    background-color: #7285ad;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 0;
+}
+
+.success-message {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(145deg, #787f8c, #7482a7);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.success-message .message-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.success-message .message-content p {
+    font-size: 16px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+.success-message button {
+    background-color: #1d4ed8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.success-message button:hover {
+    background-color: #2563eb;
+}
+
+/* Animação suave nos botões */
+.car-card button, .offer-card button, .success-message button {
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.car-card button:hover, .offer-card button:hover, .success-message button:hover {
+  transform: scale(1.05);
+}
+
+/* Animação de fade nos cards */
+.car-card {
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Para que todos os cards tenham um pequeno delay e não apareçam de uma vez */
+.car-card:nth-child(1) { animation-delay: 0.1s; }
+.car-card:nth-child(2) { animation-delay: 0.2s; }
+.car-card:nth-child(3) { animation-delay: 0.3s; }
+/* Continua para mais se tiveres mais cards */
+
